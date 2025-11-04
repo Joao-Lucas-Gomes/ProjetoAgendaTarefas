@@ -25,7 +25,7 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-
+//código//
         String path = request.getRequestURI();
 
         if(path.equals("/auth/login")
