@@ -1,7 +1,6 @@
 package com.senac.aulaapijovemprogramador.presentation;
 
 import com.senac.aulaapijovemprogramador.application.dto.usuario.UsuarioLogadoDto;
-import com.senac.aulaapijovemprogramador.application.services.PedidoService;
 import org.aspectj.weaver.ResolvedPointcutDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
