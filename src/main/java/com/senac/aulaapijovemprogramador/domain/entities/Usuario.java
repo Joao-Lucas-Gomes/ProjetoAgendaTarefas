@@ -43,13 +43,6 @@ public class Usuario {
 
     private EnumStatusUsuario status = EnumStatusUsuario.ATIVO;
 
-    @ManyToMany
-    @JoinTable(
-            name = "menu_usuario",
-            joinColumns = @JoinColumn( name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "menu_id")
-    )
-    private Set<Menu> menuAcesso;
 
     public Usuario (UsuarioCriarRequestDto usuario){
         this.email =usuario.email();

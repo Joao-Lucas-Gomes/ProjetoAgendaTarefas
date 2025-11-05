@@ -22,8 +22,4 @@ public class Empresa {
 
     private String nomeFantasia;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "empresa_id")
-    private List<Pedido> pedidos;
-
 }
