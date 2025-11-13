@@ -2,12 +2,10 @@ package com.senac.aulaapijovemprogramador.application.services;
 
 import com.senac.aulaapijovemprogramador.application.dto.usuario.UsuarioCriarRequestDto;
 import com.senac.aulaapijovemprogramador.application.dto.usuario.UsuarioResponseDto;
-import com.senac.aulaapijovemprogramador.domain.entities.Administrador;
 import com.senac.aulaapijovemprogramador.domain.entities.Usuario;
 import com.senac.aulaapijovemprogramador.domain.repository.UsuarioRepository;
 import com.senac.aulaapijovemprogramador.domain.valueobjects.EnumStatusUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,44 +42,27 @@ public class UsuarioService {
 
 
     public UsuarioResponseDto salvarUsuario(UsuarioCriarRequestDto usuarioRequest) throws Exception {
-        var usuarioBanco = usuarioRepository
-                .findByCpf_CpfAndStatusNot(usuarioRequest.cpf(),
-                        EnumStatusUsuario.EXCLUIDO)
-                .orElse(null);
-
-        if(usuarioBanco == null){
-            if(usuarioRequest.isAdm()){
-                usuarioBanco = new Administrador(usuarioRequest);
-            }else {
-                usuarioBanco = new Usuario(usuarioRequest);
-            }
-        }
-
-        if(usuarioBanco.getId() != null){
-            usuarioBanco = usuarioBanco
-                    .atulizarUsuarioFromDTO(usuarioBanco, usuarioRequest);
-        }
-
-        usuarioRepository.save(usuarioBanco);
-        return new UsuarioResponseDto(usuarioBanco);
+        Usuario usuario = new Usuario(usuarioRequest);
+        usuarioRepository.save(usuario);
+        return new UsuarioResponseDto(usuario);
     }
 
 
     public boolean excluirUsuario(Long id){
-       try{
+        try{
             var usuario = usuarioRepository.findById(id).orElse(null);
 
             if(usuario == null){
                 return false;
             }
 
-           alterarStatusUsuario(usuario,EnumStatusUsuario.EXCLUIDO);
+            alterarStatusUsuario(usuario,EnumStatusUsuario.EXCLUIDO);
 
             return true;
-       }catch (Exception e){
-           System.out.print("Erro ao excluir usuaria!");
-           return false;
-       }
+        }catch (Exception e){
+            System.out.print("Erro ao excluir usuaria!");
+            return false;
+        }
     }
 
     public boolean bloquearUsuario(Long id){
