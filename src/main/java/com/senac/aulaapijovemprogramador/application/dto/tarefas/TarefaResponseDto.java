@@ -5,8 +5,8 @@ import com.senac.aulaapijovemprogramador.domain.valueobjects.StatusProjeto;
 
 import java.time.LocalDate;
 
-public record TarefaResponseDto(String descricao, LocalDate dataCriacao, StatusProjeto  statusProjeto) {
+public record TarefaResponseDto(Long id, String descricao, LocalDate dataCriacao, StatusProjeto  statusProjeto) {
     public TarefaResponseDto(Tarefa tarefa){
-        this(tarefa.getDescricao(),tarefa.getDataCriacao(),tarefa.getStatusProjeto());
+        this(tarefa.getId(),tarefa.getDescricao(),tarefa.getDataCriacao(),tarefa.getStatusProjeto());
     }
 }

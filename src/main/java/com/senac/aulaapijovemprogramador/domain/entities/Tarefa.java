@@ -25,11 +25,10 @@ public class Tarefa {
     private Long id;
     private String descricao;
     private LocalDate dataCriacao;
-    private StatusProjeto statusProjeto;
+    private StatusProjeto statusProjeto = StatusProjeto.PENDENTE;
 
     public Tarefa(TarefaRequestDto tarefaRequestDto) {
         this.descricao = tarefaRequestDto.descricao();
         this.dataCriacao = tarefaRequestDto.dataCriacao();
-        this.statusProjeto = tarefaRequestDto.statusProjeto();
     }
 }
