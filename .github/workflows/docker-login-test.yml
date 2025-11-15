@@ -1,0 +1,27 @@
+name: Teste de Login no Docker Hub
+
+on:
+  workflow_dispatch:   # Permite rodar manualmente
+
+jobs:
+  test-docker-login:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔍 Mostrar tamanho do token (não revela o valor)
+        run: echo "Token length: ${#TOKEN}"
+        env:
+          TOKEN: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: 🔍 Mostrar username
+        run: echo "Username recebido: $USERNAME"
+        env:
+          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
+      - name: 🔐 Testando login manual no Docker Hub
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login \
+            -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: ✅ Conclusão
+        run: echo "Se você chegou aqui, o login funcionou com sucesso!"
