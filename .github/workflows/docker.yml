@@ -20,7 +20,7 @@ jobs:
     - name: ⏱️ Aguardar os contêineres estabilizarem
       run: |
         echo "Aguardando 30 segundos para os serviços iniciarem..."
-        sleep 30
+        sleep 50
     
 
     - name: 📞 Testar API (com retentativas)
